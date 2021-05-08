@@ -62,7 +62,20 @@ public class ProductController {
     }
 
     @PutMapping
-    public Product update(@RequestBody Product product){
-        return productService.save(product);
+    public ResponseEntity<ResponseData<Product>> update(@Valid @RequestBody Product product, Errors errors){
+        ResponseData<Product> responseData = new ResponseData<>();
+        if(errors.hasErrors()){
+            for (ObjectError error : errors.getAllErrors()) {
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.getMessages().add("Success");
+        responseData.setPayload(productService.save(product)); //Masih akan ada problem disini
+        return ResponseEntity.ok(responseData);
     }
 }
