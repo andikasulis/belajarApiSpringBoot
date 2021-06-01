@@ -7,6 +7,17 @@ public class CategoryData {
     @NotEmpty(message = "Name is required")
     private String name;
 
+    @NotEmpty(message = "id is require")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    private  Long id;
+
     public String getName() {
         return name;
     }

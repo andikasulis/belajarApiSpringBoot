@@ -20,6 +20,11 @@ public class CategoryService {
     private CategoryRepo categoryRepo;
 
     public Category save(Category category){
+        if (category.getId() != null){
+            Category currenyCategory = categoryRepo.findById(category.getId()).get();
+            currenyCategory.setName(category.getName());
+            category = currenyCategory;
+        }
         return categoryRepo.save(category);
     }
 

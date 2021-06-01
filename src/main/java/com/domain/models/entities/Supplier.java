@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Data;
+
 
 
 @Entity
@@ -21,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 //     generator =  ObjectIdGenerators.PropertyGenerator.class,
 //     property = "id")
 
-public class Supplier implements Serializable{
+public @Data class Supplier implements Serializable{
     
     private static final long SerialVersionUID = 1L;
 
@@ -42,43 +44,8 @@ public class Supplier implements Serializable{
     @JsonBackReference
     private Set<Product> products;
 
-    public Long getId() {
-        return id;
-    }
-
     public static long getSerialversionuid() {
         return SerialVersionUID;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    
-
 
 }
